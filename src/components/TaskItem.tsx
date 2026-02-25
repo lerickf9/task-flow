@@ -2,9 +2,11 @@ import type { Task } from "../lib/types";
 
 type TaskItemProps = {
   task: Task;
+  onDelete: (id: string) => void;
+  onCycleStatus: (id: string) => void;
 };
 
-export default function TaskItem({ task }: TaskItemProps) {
+export default function TaskItem({ task, onDelete, onCycleStatus }: TaskItemProps) {
   return (
     <div className="task">
       <div>
@@ -19,6 +21,14 @@ export default function TaskItem({ task }: TaskItemProps) {
       <div className="row">
         <small>{task.status}</small>
         <small>{task.priority}</small>
+
+        <button type="button" onClick={() => onCycleStatus(task.id)}>
+          Estado
+        </button>
+
+        <button type="button" onClick={() => onDelete(task.id)}>
+          Eliminar
+        </button>
       </div>
     </div>
   );
